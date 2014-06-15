@@ -11,9 +11,6 @@
 
 @implementation PFObject (NSCoding)
 
-@dynamic createdAt;
-@dynamic updatedAt;
-
 #define kPFObjectObjectId @"___PFObjectId"
 #define kPFObjectAllKeys @"___PFObjectAllKeys"
 #define kPFObjectClassName @"___PFObjectClassName"
@@ -65,8 +62,8 @@
 	if (self) {
 
 		//Deserialize Parse timestamps
-		self.createdAt = [aDecoder decodeObjectForKey:kPFObjectCreatedAtKey];
-		self.updatedAt = [aDecoder decodeObjectForKey:kPFObjectUpdatedAtKey];
+		[self setValue:[aDecoder decodeObjectForKey:kPFObjectCreatedAtKey] forKey:@"createdAt"];
+		[self setValue:[aDecoder decodeObjectForKey:kPFObjectUpdatedAtKey] forKey:@"updatedAt"];
 
 		//Deserialize all non-nil Parse properties
 		for (NSString* key in allKeys) {
